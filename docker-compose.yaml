@@ -2,10 +2,15 @@ version: "3"
 services:
  card-properties-db:
   image: postgres:12.1-alpine
-  deploy:
-   replicas: 1
-  ports: 
-   - "5432:5432"
   environment:
-    POSTGRES_USER: postgres
-    POSTGRES_PASSWORD: secret
+   POSTGRES_USER: postgres
+   POSTGRES_PASSWORD: secret
+ backend:
+  build: ./backend/
+  command: python manage.py runserver 0.0.0.0:8000
+  ports:
+   - "8000:8000"
+  volumes:
+   - ./backend:/app
+  depends_on:
+   - card-properties-db
