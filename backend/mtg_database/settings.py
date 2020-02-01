@@ -80,6 +80,7 @@ DATABASES = {
         'USER': 'postgres',
         'HOST': 'card-properties-db',
         'PORT': 5432,
+        'PASSWORD': 'secret',
     }
 }
 
