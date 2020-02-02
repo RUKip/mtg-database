@@ -21,7 +21,8 @@ class Type(models.Model):
     name = models.CharField(max_length=50)
 
 
-class Creature(Type):
+class Creature(models.Model):
+    type = models.OneToOneField(Type, on_delete=models.CASCADE, primary_key=True)
     power = models.IntegerField()
     toughness = models.IntegerField()
 
@@ -36,6 +37,10 @@ class Ability(models.Model):
     effect = models.CharField(max_length=300)
 
 
-class ActivatedAbility(Ability):
+class ActivatedAbility(models.Model):
+    ability = models.OneToOneField(Ability, on_delete=models.CASCADE, primary_key=True)
     cost = models.ForeignKey(Cost, on_delete=models.CASCADE)
 
+
+class PassiveAbility(models.Model):
+    ability = models.OneToOneField(Ability, on_delete=models.CASCADE, primary_key=True)
